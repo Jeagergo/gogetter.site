@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GoGetter - Your Personal Success Companion</title>
+    <title>GoGetter - Achieve Your Goals</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -63,10 +63,28 @@
             text-decoration: none;
         }
         
-        .logo i {
-            color: var(--primary-orange);
+        .logo-symbol {
+            position: relative;
             margin-right: 10px;
+        }
+        
+        .logo-g1 {
+            color: var(--primary-blue);
+            position: relative;
+            z-index: 2;
             font-size: 28px;
+            font-weight: 800;
+        }
+        
+        .logo-g2 {
+            color: var(--primary-orange);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            transform: translate(2px, 2px);
+            font-size: 28px;
+            font-weight: 800;
         }
         
         .nav-links {
@@ -413,14 +431,16 @@
         <div class="container">
             <nav>
                 <a href="#" class="logo">
-                    <i class="fas fa-bolt"></i>
+                    <div class="logo-symbol">
+                        <span class="logo-g1">G</span>
+                        <span class="logo-g2">G</span>
+                    </div>
                     GoGetter
                 </a>
                 <ul class="nav-links">
                     <li><a href="#features">Features</a></li>
                     <li><a href="#how-it-works">How It Works</a></li>
                     <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
                     <li><a href="#" class="cta-button">Get Started</a></li>
                 </ul>
             </nav>
