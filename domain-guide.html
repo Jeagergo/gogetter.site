@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Pages Domain Setup - GoGetter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7f9;
+            color: #34526F;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #34526F 0%, #4a6c8f 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo i {
+            color: #f37a20;
+            font-size: 32px;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: #34526F;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f37a20;
+        }
+        
+        h3 {
+            color: #34526F;
+            margin: 20px 0 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            background-color: #f37a20;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        code {
+            background-color: #f5f7f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            border: 1px solid #e1e4e8;
+        }
+        
+        pre {
+            background-color: #2a4058;
+            color: white;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: monospace;
+        }
+        
+        .note {
+            background-color: #fff9e6;
+            border-left: 4px solid #f37a20;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .warning {
+            background-color: #ffe6e6;
+            border-left: 4px solid #ff5252;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .success {
+            background-color: #e6ffe6;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .domain-status {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: #fff9e6;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .status-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            color: #f37a20;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #f37a20;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #e06e1d;
+        }
+        
+        .dns-record {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        .dns-record th, .dns-record td {
+            border: 1px solid #e1e4e8;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        .dns-record th {
+            background-color: #f5f7f9;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .step {
+                flex-direction: column;
+            }
+            
+            .step-number {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-bolt"></i>
+                <div class="logo-text">GoGetter</div>
+            </div>
+            <h1>GitHub Pages Domain Setup</h1>
+            <p class="subtitle">A step-by-step guide to configuring your custom domain with GitHub Pages</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>Understanding the DNS Check Process</h2>
+            <p>When you add a custom domain to GitHub Pages, it goes through a verification process that can take anywhere from a few minutes to up to 24 hours.</p>
+            
+            <div class="domain-status">
+                <div class="status-icon">⏳</div>
+                <div>
+                    <h3>DNS Check in Progress</h3>
+                    <p>Your domain <code>www.gogetter.site</code> is currently being verified by GitHub. This process checks that your DNS records are correctly configured.</p>
+                </div>
+            </div>
+            
+            <div class="note">
+                <p><strong>Note:</strong> It's normal for this process to take some time. DNS changes need to propagate across the internet, which can cause delays.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Step-by-Step Configuration Guide</h2>
+            
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>GitHub Pages Settings</h3>
+                    <p>In your GitHub repository, go to <strong>Settings > Pages</strong>. In the "Custom domain" section, enter your domain (<code>www.gogetter.site</code>) and click Save.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>DNS Configuration at Domains.co.za</h3>
+                    <p>Log in to your Domains.co.za account and navigate to DNS management for your domain.</p>
+                    <p>You need to create the following records:</p>
+                    
+                    <table class="dns-record">
+                        <tr>
+                            <th>Type</th>
+                            <th>Name</th>
+                            <th>Value</th>
+                            <th>TTL</th>
+                        </tr>
+                        <tr>
+                            <td>CNAME</td>
+                            <td>www</td>
+                            <td>jeagergo.github.io</td>
+                            <td>3600</td>
+                        </tr>
+                        <tr>
+                            <td>A</td>
+                            <td>@</td>
+                            <td>185.199.108.153</td>
+                            <td>3600</td>
+                        </tr>
+                        <tr>
+                            <td>A</td>
+                            <td>@</td>
+                            <td>185.199.109.153</td>
+                            <td>3600</td>
+                        </tr>
+                        <tr>
+                            <td>A</td>
+                            <td>@</td>
+                            <td>185.199.110.153</td>
+                            <td>3600</td>
+                        </tr>
+                        <tr>
+                            <td>A</td>
+                            <td>@</td>
+                            <td>185.199.111.153</td>
+                            <td>3600</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Wait for DNS Propagation</h3>
+                    <p>After updating your DNS records, it can take up to 24 hours for the changes to propagate globally. GitHub will automatically detect when your DNS is properly configured.</p>
+                    <div class="note">
+                        <p><strong>Tip:</strong> You can use tools like <a href="https://dnschecker.org" target="_blank">DNS Checker</a> to monitor the propagation status.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Enforce HTTPS (Recommended)</h3>
+                    <p>Once your domain is properly configured, go back to your GitHub Pages settings and enable the "Enforce HTTPS" option. This provides secure connections for your visitors.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Troubleshooting Common Issues</h2>
+            
+            <h3>DNS Check Taking Too Long</h3>
+            <p>If the DNS check has been ongoing for more than 24 hours:</p>
+            <ul>
+                <li>Double-check that your DNS records are exactly as specified</li>
+                <li>Ensure there are no typos in your domain name in GitHub settings</li>
+                <li>Try removing the custom domain from GitHub, waiting 5 minutes, and adding it again</li>
+            </ul>
+            
+            <h3>Domain Not Redirecting Properly</h3>
+            <p>If your domain isn't working as expected:</p>
+            <ul>
+                <li>Verify that you've configured both the CNAME and A records correctly</li>
+                <li>Check if your domain registrar has any additional requirements for custom domains</li>
+                <li>Ensure your GitHub repository is public (required for GitHub Pages)</li>
+            </ul>
+            
+            <div class="warning">
+                <p><strong>Important:</strong> Avoid using a custom domain that starts with http:// or https:// in the GitHub settings. Just enter the domain name itself (e.g., www.gogetter.site).</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Next Steps After Configuration</h2>
+            <p>Once your custom domain is successfully configured with GitHub Pages:</p>
+            
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Verify Your Site is Live</h3>
+                    <p>Visit your domain in a web browser to confirm everything is working correctly.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Set Up Paystack Integration</h3>
+                    <p>With your landing page live at your custom domain, you can proceed with the Paystack approval process.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Monitor Your Site</h3>
+                    <p>Regularly check that your site remains accessible and that your DNS configuration persists.</p>
+                </div>
+            </div>
+            
+            <div class="success">
+                <p><strong>Success Tip:</strong> Remember that code <code>GG2024</code> for your future communications about GoGetter!</p>
+            </div>
+            
+            <a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site" class="btn" target="_blank">GitHub Documentation</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Need more help? Contact GitHub Support or consult your domain registrar's documentation.</p>
+            <p>GoGetter © 2024 | Code: GG2024</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple page interaction
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+            
+            // Animate cards sequentially
+            setTimeout(() => {
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 200 * index);
+                });
+            }, 300);
+        });
+    </script>
+</body>
+</html>
