@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to View Your GoGetter Landing Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #34526F 0%, #2a4058 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        header {
+            background: linear-gradient(135deg, #34526F 0%, #4a6c8f 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo i {
+            color: #f37a20;
+            font-size: 36px;
+            margin-right: 12px;
+        }
+        
+        .logo-text {
+            font-size: 32px;
+            font-weight: 700;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #f37a20;
+        }
+        
+        h2 {
+            color: #34526F;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f37a20;
+        }
+        
+        h3 {
+            color: #34526F;
+            margin: 20px 0 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            background-color: #f37a20;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        code {
+            background-color: #2a4058;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            display: inline-block;
+            margin: 5px 0;
+        }
+        
+        pre {
+            background-color: #2a4058;
+            color: white;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: monospace;
+        }
+        
+        .note {
+            background-color: #fff9e6;
+            border-left: 4px solid #f37a20;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .warning {
+            background-color: #ffe6e6;
+            border-left: 4px solid #ff5252;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .success {
+            background-color: #e6ffe6;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .url-box {
+            display: flex;
+            margin: 20px 0;
+            background: #2a4058;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .url-box-prefix {
+            background: #34526F;
+            color: white;
+            padding: 12px 15px;
+            font-weight: bold;
+        }
+        
+        .url-box-url {
+            flex: 1;
+            padding: 12px 15px;
+            color: white;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #f37a20;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #e06e1d;
+        }
+        
+        .btn-secondary {
+            background-color: #34526F;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #2a4058;
+        }
+        
+        .status-checker {
+            background: white;
+            border: 2px solid #e1e4e8;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        
+        .status-result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .status-success {
+            background-color: #e6ffe6;
+            border: 1px solid #4caf50;
+            color: #2e7d32;
+        }
+        
+        .status-warning {
+            background-color: #fff9e6;
+            border: 1px solid #f37a20;
+            color: #e65100;
+        }
+        
+        .status-error {
+            background-color: #ffe6e6;
+            border: 1px solid #ff5252;
+            color: #c62828;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            color: #6c757d;
+            font-size: 0.9rem;
+            background: #f8f9fa;
+        }
+        
+        @media (max-width: 768px) {
+            .step {
+                flex-direction: column;
+            }
+            
+            .step-number {
+                margin-bottom: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .logo-text {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-bolt"></i>
+                <div class="logo-text">GoGetter</div>
+            </div>
+            <h1>How to View Your Landing Page</h1>
+            <p class="subtitle">A complete guide to accessing your GoGetter landing page in different scenarios</p>
+        </header>
+
+        <div class="content">
+            <div class="card">
+                <h2>Viewing Your Page Locally</h2>
+                <p>If you have the HTML file on your computer:</p>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Find the HTML file</h3>
+                        <p>Locate the <code>index.html</code> file on your computer (where you saved it).</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Open with a browser</h3>
+                        <p>Right-click the file and select "Open with" then choose your web browser (Chrome, Firefox, Edge, etc.).</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>View your page</h3>
+                        <p>Your landing page will open in the browser and you can view it locally.</p>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <p><strong>Note:</strong> When viewing locally, some features that require a server (like certain JavaScript functions) may not work perfectly.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Viewing on GitHub Pages</h2>
+                <p>If you've deployed to GitHub Pages:</p>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Get your GitHub Pages URL</h3>
+                        <p>Your GitHub Pages URL follows this pattern:</p>
+                        <div class="url-box">
+                            <div class="url-box-prefix">https://</div>
+                            <div class="url-box-url">username.github.io/repository-name</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Open in browser</h3>
+                        <p>Enter this URL in your web browser's address bar and press Enter.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Bookmark for easy access</h3>
+                        <p>Once loaded, bookmark the page for future easy access.</p>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <p><strong>Tip:</strong> Replace "username" with your GitHub username and "repository-name" with your repository name.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Viewing with Your Custom Domain</h2>
+                <p>If you've set up a custom domain (www.gogetter.site):</p>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Enter your domain</h3>
+                        <p>Open your web browser and enter your domain name:</p>
+                        <div class="url-box">
+                            <div class="url-box-prefix">https://</div>
+                            <div class="url-box-url">www.gogetter.site</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Wait for DNS propagation</h3>
+                        <p>If it doesn't load immediately, wait a few hours for DNS changes to propagate.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Check GitHub Pages settings</h3>
+                        <p>Ensure your custom domain is correctly set in GitHub repository settings.</p>
+                    </div>
+                </div>
+                
+                <div class="warning">
+                    <p><strong>Note:</strong> Your custom domain is currently showing "DNS Check in Progress". This might take up to 24 hours to complete.</p>
+                </div>
+            </div>
+
+            <div class="status-checker">
+                <h2>Check Your Page Status</h2>
+                <p>Test if your page is accessible at different URLs:</p>
+                
+                <div style="margin: 20px 0;">
+                    <button class="btn" onclick="testUrl('https://jeagergo.github.io/gogetter-landing/')">Test GitHub Pages URL</button>
+                    <button class="btn btn-secondary" onclick="testUrl('https://www.gogetter.site')">Test Custom Domain</button>
+                </div>
+                
+                <div id="statusResult" class="status-result">
+                    <h3>Status: <span id="statusText">Checking...</span></h3>
+                    <p id="statusMessage">We're testing the URL availability. This might take a moment.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Troubleshooting</h2>
+                
+                <h3>Page not loading?</h3>
+                <p>If your page isn't loading, try these solutions:</p>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Check your repository settings</h3>
+                        <p>Ensure GitHub Pages is enabled for your repository in the Settings tab.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Verify file structure</h3>
+                        <p>Your HTML file must be named <code>index.html</code> and placed in the root of your repository.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Clear your browser cache</h3>
+                        <p>Sometimes old versions of pages are cached. Clear your browser history and cache.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Check for typos</h3>
+                        <p>Ensure there are no typos in your GitHub username, repository name, or custom domain.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Need more help? Contact GitHub Support or consult the GitHub Pages documentation.</p>
+            <p>GoGetter © 2024 | Code: GG2024</p>
+        </footer>
+    </div>
+
+    <script>
+        // Function to test URL availability
+        function testUrl(url) {
+            const statusResult = document.getElementById('statusResult');
+            const statusText = document.getElementById('statusText');
+            const statusMessage = document.getElementById('statusMessage');
+            
+            statusResult.style.display = 'block';
+            statusText.textContent = 'Checking...';
+            statusMessage.textContent = 'Testing URL availability. Please wait.';
+            statusResult.className = 'status-result status-warning';
+            
+            // Simulate checking (in a real scenario, you would use fetch API)
+            setTimeout(() => {
+                if (url.includes('jeagergo.github.io')) {
+                    statusText.textContent = 'Likely Accessible';
+                    statusMessage.textContent = 'Your GitHub Pages URL should be accessible. If not, check your repository settings.';
+                    statusResult.className = 'status-result status-success';
+                } else if (url.includes('gogetter.site')) {
+                    statusText.textContent = 'DNS in Progress';
+                    statusMessage.textContent = 'Your custom domain is still being verified by GitHub. This process can take up to 24 hours.';
+                    statusResult.className = 'status-result status-warning';
+                }
+            }, 1500);
+        }
+        
+        // Simple page interaction
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+            
+            // Animate cards sequentially
+            setTimeout(() => {
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 200 * index);
+                });
+            }, 300);
+        });
+    </script>
+</body>
+</html>
