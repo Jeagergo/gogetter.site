@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Pages Domain Setup - GoGetter</title>
+    <title>Fix Domain Redirect Issue - GoGetter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -13,24 +14,27 @@
         }
         
         body {
-            background-color: #f5f7f9;
-            color: #34526F;
+            background: linear-gradient(135deg, #34526F 0%, #2a4058 100%);
+            color: #333;
             line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
         }
         
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
         
         header {
             background: linear-gradient(135deg, #34526F 0%, #4a6c8f 100%);
             color: white;
-            padding: 40px 0;
+            padding: 30px;
             text-align: center;
-            border-radius: 0 0 10px 10px;
-            margin-bottom: 30px;
         }
         
         .logo {
@@ -42,12 +46,12 @@
         
         .logo i {
             color: #f37a20;
-            font-size: 32px;
-            margin-right: 10px;
+            font-size: 36px;
+            margin-right: 12px;
         }
         
         .logo-text {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 700;
         }
         
@@ -63,12 +67,17 @@
             margin: 0 auto;
         }
         
+        .content {
+            padding: 30px;
+        }
+        
         .card {
-            background: white;
+            background: #f8f9fa;
             border-radius: 10px;
             padding: 25px;
             margin-bottom: 25px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #f37a20;
         }
         
         h2 {
@@ -112,11 +121,13 @@
         }
         
         code {
-            background-color: #f5f7f9;
-            padding: 2px 6px;
+            background-color: #2a4058;
+            color: white;
+            padding: 4px 8px;
             border-radius: 4px;
             font-family: monospace;
-            border: 1px solid #e1e4e8;
+            display: inline-block;
+            margin: 5px 0;
         }
         
         pre {
@@ -153,19 +164,27 @@
             border-radius: 4px;
         }
         
-        .domain-status {
+        .url-box {
             display: flex;
-            align-items: center;
-            padding: 15px;
-            background-color: #fff9e6;
-            border-radius: 8px;
             margin: 20px 0;
+            background: #2a4058;
+            border-radius: 8px;
+            overflow: hidden;
         }
         
-        .status-icon {
-            font-size: 24px;
-            margin-right: 15px;
-            color: #f37a20;
+        .url-box-prefix {
+            background: #34526F;
+            color: white;
+            padding: 12px 15px;
+            font-weight: bold;
+        }
+        
+        .url-box-url {
+            flex: 1;
+            padding: 12px 15px;
+            color: white;
+            font-family: monospace;
+            overflow-x: auto;
         }
         
         .btn {
@@ -178,10 +197,20 @@
             font-weight: 600;
             margin-top: 10px;
             transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
         }
         
         .btn:hover {
             background-color: #e06e1d;
+        }
+        
+        .btn-secondary {
+            background-color: #34526F;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #2a4058;
         }
         
         .dns-record {
@@ -203,9 +232,10 @@
         footer {
             text-align: center;
             margin-top: 40px;
-            padding: 20px;
+            padding: 30px;
             color: #6c757d;
             font-size: 0.9rem;
+            background: #f8f9fa;
         }
         
         @media (max-width: 768px) {
@@ -216,184 +246,195 @@
             .step-number {
                 margin-bottom: 10px;
             }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .logo-text {
+                font-size: 28px;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
+    <div class="container">
+        <header>
             <div class="logo">
                 <i class="fas fa-bolt"></i>
                 <div class="logo-text">GoGetter</div>
             </div>
-            <h1>GitHub Pages Domain Setup</h1>
-            <p class="subtitle">A step-by-step guide to configuring your custom domain with GitHub Pages</p>
-        </div>
-    </header>
+            <h1>Fix Domain Redirect Issue</h1>
+            <p class="subtitle">Solving the problem where your domain redirects to Domains.co.za instead of your landing page</p>
+        </header>
 
-    <div class="container">
-        <div class="card">
-            <h2>Understanding the DNS Check Process</h2>
-            <p>When you add a custom domain to GitHub Pages, it goes through a verification process that can take anywhere from a few minutes to up to 24 hours.</p>
-            
-            <div class="domain-status">
-                <div class="status-icon">⏳</div>
-                <div>
-                    <h3>DNS Check in Progress</h3>
-                    <p>Your domain <code>www.gogetter.site</code> is currently being verified by GitHub. This process checks that your DNS records are correctly configured.</p>
-                </div>
+        <div class="content">
+            <div class="card">
+                <h2>Why This Happens</h2>
+                <p>When your domain redirects to your hosting provider (Domains.co.za) instead of your GitHub Pages site, it's usually because of one of these reasons:</p>
+                
+                <ul>
+                    <li>DNS records are not correctly configured</li>
+                    <li>The domain is still pointing to default parking pages</li>
+                    <li>Nameservers are not properly set</li>
+                    <li>There's a redirect set up in your domain control panel</li>
+                </ul>
             </div>
-            
-            <div class="note">
-                <p><strong>Note:</strong> It's normal for this process to take some time. DNS changes need to propagate across the internet, which can cause delays.</p>
-            </div>
-        </div>
 
-        <div class="card">
-            <h2>Step-by-Step Configuration Guide</h2>
-            
-            <div class="step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h3>GitHub Pages Settings</h3>
-                    <p>In your GitHub repository, go to <strong>Settings > Pages</strong>. In the "Custom domain" section, enter your domain (<code>www.gogetter.site</code>) and click Save.</p>
+            <div class="card">
+                <h2>Step-by-Step Solution</h2>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Log into Domains.co.za</h3>
+                        <p>Access your Domains.co.za account and navigate to the DNS management section for your domain (www.gogetter.site).</p>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h3>DNS Configuration at Domains.co.za</h3>
-                    <p>Log in to your Domains.co.za account and navigate to DNS management for your domain.</p>
-                    <p>You need to create the following records:</p>
-                    
-                    <table class="dns-record">
-                        <tr>
-                            <th>Type</th>
-                            <th>Name</th>
-                            <th>Value</th>
-                            <th>TTL</th>
-                        </tr>
-                        <tr>
-                            <td>CNAME</td>
-                            <td>www</td>
-                            <td>jeagergo.github.io</td>
-                            <td>3600</td>
-                        </tr>
-                        <tr>
-                            <td>A</td>
-                            <td>@</td>
-                            <td>185.199.108.153</td>
-                            <td>3600</td>
-                        </tr>
-                        <tr>
-                            <td>A</td>
-                            <td>@</td>
-                            <td>185.199.109.153</td>
-                            <td>3600</td>
-                        </tr>
-                        <tr>
-                            <td>A</td>
-                            <td>@</td>
-                            <td>185.199.110.153</td>
-                            <td>3600</td>
-                        </tr>
-                        <tr>
-                            <td>A</td>
-                            <td>@</td>
-                            <td>185.199.111.153</td>
-                            <td>3600</td>
-                        </tr>
-                    </table>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Remove Default Records</h3>
+                        <p>Delete any existing A records or CNAME records that might be pointing to Domains.co.za servers or parking pages.</p>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h3>Wait for DNS Propagation</h3>
-                    <p>After updating your DNS records, it can take up to 24 hours for the changes to propagate globally. GitHub will automatically detect when your DNS is properly configured.</p>
-                    <div class="note">
-                        <p><strong>Tip:</strong> You can use tools like <a href="https://dnschecker.org" target="_blank">DNS Checker</a> to monitor the propagation status.</p>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Add Correct GitHub Pages Records</h3>
+                        <p>Create these DNS records exactly as shown:</p>
+                        
+                        <table class="dns-record">
+                            <tr>
+                                <th>Type</th>
+                                <th>Name</th>
+                                <th>Value</th>
+                                <th>TTL</th>
+                            </tr>
+                            <tr>
+                                <td>CNAME</td>
+                                <td>www</td>
+                                <td>jeagergo.github.io</td>
+                                <td>3600</td>
+                            </tr>
+                            <tr>
+                                <td>A</td>
+                                <td>@</td>
+                                <td>185.199.108.153</td>
+                                <td>3600</td>
+                            </tr>
+                            <tr>
+                                <td>A</td>
+                                <td>@</td>
+                                <td>185.199.109.153</td>
+                                <td>3600</td>
+                            </tr>
+                            <tr>
+                                <td>A</td>
+                                <td>@</td>
+                                <td>185.199.110.153</td>
+                                <td>3600</td>
+                            </tr>
+                            <tr>
+                                <td>A</td>
+                                <td>@</td>
+                                <td>185.199.111.153</td>
+                                <td>3600</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Check Nameservers</h3>
+                        <p>Ensure your nameservers are set to Domains.co.za's nameservers (unless you're using custom nameservers):</p>
+                        <ul>
+                            <li>ns1.domains.co.za</li>
+                            <li>ns2.domains.co.za</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Wait for Propagation</h3>
+                        <p>DNS changes can take up to 24-48 hours to fully propagate across the internet. Be patient during this process.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3>Verify in GitHub</h3>
+                        <p>In your GitHub repository, go to Settings > Pages and ensure your custom domain is correctly entered as "www.gogetter.site".</p>
                     </div>
                 </div>
             </div>
-            
-            <div class="step">
-                <div class="step-number">4</div>
-                <div class="step-content">
-                    <h3>Enforce HTTPS (Recommended)</h3>
-                    <p>Once your domain is properly configured, go back to your GitHub Pages settings and enable the "Enforce HTTPS" option. This provides secure connections for your visitors.</p>
+
+            <div class="card">
+                <h2>Quick Check While Waiting</h2>
+                <p>While waiting for DNS changes to propagate, you can:</p>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Test Using GitHub URL</h3>
+                        <p>Access your site directly via GitHub Pages:</p>
+                        <div class="url-box">
+                            <div class="url-box-prefix">https://</div>
+                            <div class="url-box-url">jeagergo.github.io/gogetter-landing/</div>
+                        </div>
+                    </div>
                 </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Clear Your Browser Cache</h3>
+                        <p>Sometimes your browser caches old DNS information. Clear your cache or try accessing your site in an incognito window.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Check DNS Propagation</h3>
+                        <p>Use a tool like <a href="https://dnschecker.org" target="_blank">DNS Checker</a> to see if your DNS changes have propagated globally.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Still Having Issues?</h2>
+                
+                <div class="warning">
+                    <p>If after 48 hours your domain still redirects to Domains.co.za:</p>
+                    <ul>
+                        <li>Double-check that you've removed all default records from Domains.co.za</li>
+                        <li>Contact Domains.co.za support and ask them to ensure no server-side redirects are active</li>
+                        <li>Verify that your domain is not set to "Parked" mode in your control panel</li>
+                    </ul>
+                </div>
+                
+                <p>You might need to contact Domains.co.za support directly and ask them to:</p>
+                <ol>
+                    <li>Remove any default parking page settings</li>
+                    <li>Confirm that your DNS records are properly configured</li>
+                    <li>Ensure there are no hidden redirects applied to your domain</li>
+                </ol>
             </div>
         </div>
 
-        <div class="card">
-            <h2>Troubleshooting Common Issues</h2>
-            
-            <h3>DNS Check Taking Too Long</h3>
-            <p>If the DNS check has been ongoing for more than 24 hours:</p>
-            <ul>
-                <li>Double-check that your DNS records are exactly as specified</li>
-                <li>Ensure there are no typos in your domain name in GitHub settings</li>
-                <li>Try removing the custom domain from GitHub, waiting 5 minutes, and adding it again</li>
-            </ul>
-            
-            <h3>Domain Not Redirecting Properly</h3>
-            <p>If your domain isn't working as expected:</p>
-            <ul>
-                <li>Verify that you've configured both the CNAME and A records correctly</li>
-                <li>Check if your domain registrar has any additional requirements for custom domains</li>
-                <li>Ensure your GitHub repository is public (required for GitHub Pages)</li>
-            </ul>
-            
-            <div class="warning">
-                <p><strong>Important:</strong> Avoid using a custom domain that starts with http:// or https:// in the GitHub settings. Just enter the domain name itself (e.g., www.gogetter.site).</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Next Steps After Configuration</h2>
-            <p>Once your custom domain is successfully configured with GitHub Pages:</p>
-            
-            <div class="step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h3>Verify Your Site is Live</h3>
-                    <p>Visit your domain in a web browser to confirm everything is working correctly.</p>
-                </div>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h3>Set Up Paystack Integration</h3>
-                    <p>With your landing page live at your custom domain, you can proceed with the Paystack approval process.</p>
-                </div>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h3>Monitor Your Site</h3>
-                    <p>Regularly check that your site remains accessible and that your DNS configuration persists.</p>
-                </div>
-            </div>
-            
-            <div class="success">
-                <p><strong>Success Tip:</strong> Remember that code <code>GG2024</code> for your future communications about GoGetter!</p>
-            </div>
-            
-            <a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site" class="btn" target="_blank">GitHub Documentation</a>
-        </div>
-    </div>
-
-    <footer>
-        <div class="container">
-            <p>Need more help? Contact GitHub Support or consult your domain registrar's documentation.</p>
+        <footer>
+            <p>Need more help? Contact Domains.co.za support or consult the GitHub Pages documentation.</p>
             <p>GoGetter © 2024 | Code: GG2024</p>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
     <script>
         // Simple page interaction
