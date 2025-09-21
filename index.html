@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GoGetter - Achieve Your Goals</title>
+    <title>GoGetter : Dignity Through Opportunity</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -63,28 +63,9 @@
             text-decoration: none;
         }
         
-        .logo-symbol {
-            position: relative;
+        .logo img {
+            height: 40px;
             margin-right: 10px;
-        }
-        
-        .logo-g1 {
-            color: var(--primary-blue);
-            position: relative;
-            z-index: 2;
-            font-size: 28px;
-            font-weight: 800;
-        }
-        
-        .logo-g2 {
-            color: var(--primary-orange);
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            transform: translate(2px, 2px);
-            font-size: 28px;
-            font-weight: 800;
         }
         
         .nav-links {
@@ -115,6 +96,9 @@
             text-decoration: none;
             font-weight: 600;
             transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
         }
         
         .cta-button:hover {
@@ -130,8 +114,8 @@
         }
         
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
         }
         
         .hero p {
@@ -151,16 +135,6 @@
         .hero-buttons .cta-button {
             padding: 12px 30px;
             font-size: 1.1rem;
-        }
-        
-        .secondary-button {
-            background-color: transparent;
-            border: 2px solid var(--light-text);
-            color: var(--light-text);
-        }
-        
-        .secondary-button:hover {
-            background-color: rgba(255, 255, 255, 0.1);
         }
         
         /* Features Section */
@@ -267,47 +241,67 @@
             z-index: 1;
         }
         
-        /* Testimonials */
-        .testimonials {
+        /* Pricing Section */
+        .pricing {
             padding: 80px 0;
             background-color: white;
         }
         
-        .testimonial-grid {
+        .pricing-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
+            margin-top: 50px;
         }
         
-        .testimonial-card {
+        .pricing-card {
             background-color: var(--light-bg);
             border-radius: var(--border-radius);
-            padding: 30px;
+            padding: 40px 30px;
+            text-align: center;
             box-shadow: var(--box-shadow);
+            transition: transform 0.3s;
         }
         
-        .testimonial-text {
-            font-style: italic;
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .pricing-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            color: var(--primary-orange);
             margin-bottom: 20px;
-            color: var(--dark-text);
+            font-weight: 700;
         }
         
-        .testimonial-author {
-            display: flex;
-            align-items: center;
+        .price span {
+            font-size: 1rem;
+            color: var(--gray-text);
         }
         
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: var(--primary-blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            margin-right: 15px;
+        .pricing-features {
+            list-style: none;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .pricing-features li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .pricing-features li:before {
+            content: "✓";
+            color: var(--primary-orange);
+            position: absolute;
+            left: 0;
         }
         
         /* CTA Section */
@@ -395,6 +389,36 @@
             color: rgba(255, 255, 255, 0.6);
         }
         
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .close-modal {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
@@ -422,6 +446,10 @@
             .step:not(:last-child):after {
                 display: none;
             }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -431,17 +459,14 @@
         <div class="container">
             <nav>
                 <a href="#" class="logo">
-                    <div class="logo-symbol">
-                        <span class="logo-g1">G</span>
-                        <span class="logo-g2">G</span>
-                    </div>
+                    <img src="logo.png.png" alt="GoGetter Logo">
                     GoGetter
                 </a>
                 <ul class="nav-links">
                     <li><a href="#features">Features</a></li>
                     <li><a href="#how-it-works">How It Works</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#" class="cta-button">Get Started</a></li>
+                    <li><a href="#pricing">Subscriptions</a></li>
+                    <li><a href="#" class="cta-button" id="downloadBtn">Download Now</a></li>
                 </ul>
             </nav>
         </div>
@@ -450,11 +475,10 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Achieve Your Goals with GoGetter</h1>
-            <p>GoGetter is the ultimate productivity app that helps you set goals, track progress, and accomplish more than ever before. Start your journey to success today.</p>
+            <h1>GoGetter: Dignity Through Opportunity</h1>
+            <p>Connect with clients, find gig work, and build your career with GoGetter - the platform that brings dignity back to you.</p>
             <div class="hero-buttons">
-                <a href="#" class="cta-button">Get Started Free</a>
-                <a href="#" class="cta-button secondary-button">Watch Demo</a>
+                <a href="#" class="cta-button" id="startFreeBtn">Start Free</a>
             </div>
         </div>
     </section>
@@ -463,30 +487,30 @@
     <section class="features" id="features">
         <div class="container">
             <div class="section-title">
-                <h2>Powerful Features</h2>
-                <p>Everything you need to turn your ambitions into achievements</p>
+                <h2>Bring Dignity Back to You</h2>
+                <p>Everything you need to find work and build your career</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-bullseye"></i>
+                        <i class="fas fa-user-plus"></i>
                     </div>
-                    <h3>Goal Setting</h3>
-                    <p>Set SMART goals with clear milestones and track your progress visually.</p>
+                    <h3>Need a job?</h3>
+                    <p>Sign up as a GoGetter and create your profile to start finding gig work opportunities in your area.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-tasks"></i>
+                        <i class="fas fa-briefcase"></i>
                     </div>
-                    <h3>Task Management</h3>
-                    <p>Break down big goals into manageable tasks with deadlines and priorities.</p>
+                    <h3>Job Board</h3>
+                    <p>Browse our Job Board on the app to find available gigs that match your skills and preferences.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
+                        <i class="fas fa-handshake"></i>
                     </div>
-                    <h3>Progress Analytics</h3>
-                    <p>Get detailed insights into your productivity patterns and achievements.</p>
+                    <h3>Apply & Connect</h3>
+                    <p>Apply for gigs and connect directly with clients to discuss details and arrange your work.</p>
                 </div>
             </div>
         </div>
@@ -497,65 +521,68 @@
         <div class="container">
             <div class="section-title">
                 <h2>How GoGetter Works</h2>
-                <p>Start achieving in three simple steps</p>
+                <p>Simple steps to get started with the platform</p>
             </div>
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
                     <h3>Sign Up</h3>
-                    <p>Create your free account in less than a minute</p>
+                    <p>Clients, GoGetters, and companies sign up on the platform with their details.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Set Goals</h3>
-                    <p>Define what you want to achieve with our guided process</p>
+                    <h3>Post Gig Work</h3>
+                    <p>Clients post available gig work with details, requirements, and budget.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h3>Track & Achieve</h3>
-                    <p>Monitor your progress and celebrate your successes</p>
+                    <h3>Apply for Gigs</h3>
+                    <p>GoGetters and companies can browse and apply for gigs that match their skills.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="testimonials" id="testimonials">
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
         <div class="container">
             <div class="section-title">
-                <h2>User Testimonials</h2>
-                <p>See what our users have achieved with GoGetter</p>
+                <h2>Subscription Plans</h2>
+                <p>Choose the plan that works best for you</p>
             </div>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"GoGetter transformed how I approach my goals. I've accomplished more in the past 3 months than I did in the previous year!"</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">TJ</div>
-                        <div>
-                            <h4>Thabo J.</h4>
-                            <p>Entrepreneur</p>
-                        </div>
-                    </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Client</h3>
+                    <div class="price">Free</div>
+                    <ul class="pricing-features">
+                        <li>Post unlimited gigs</li>
+                        <li>Browse GoGetter profiles</li>
+                        <li>Secure in-app messaging</li>
+                        <li>Rating and review system</li>
+                    </ul>
+                    <a href="#" class="cta-button" id="clientPlanBtn">Get Started</a>
                 </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"The progress tracking features kept me motivated. I finally finished writing my book after years of procrastination."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">NM</div>
-                        <div>
-                            <h4>Nomsa M.</h4>
-                            <p>Author</p>
-                        </div>
-                    </div>
+                <div class="pricing-card">
+                    <h3>GoGetter</h3>
+                    <div class="price">R90 <span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Apply for unlimited gigs</li>
+                        <li>Full profile visibility</li>
+                        <li>Direct client messaging</li>
+                        <li>Payment protection</li>
+                    </ul>
+                    <a href="#" class="cta-button" id="gogetterPlanBtn">Choose Plan</a>
                 </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"As a student, GoGetter helped me organize my study schedule and improve my grades significantly. Highly recommend!"</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">SK</div>
-                        <div>
-                            <h4>Sipho K.</h4>
-                            <p>Student</p>
-                        </div>
-                    </div>
+                <div class="pricing-card">
+                    <h3>Company</h3>
+                    <div class="price">R845 <span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Multiple team members</li>
+                        <li>Company profile page</li>
+                        <li>Priority listing in searches</li>
+                        <li>Advanced analytics</li>
+                    </ul>
+                    <a href="#" class="cta-button" id="companyPlanBtn">Choose Plan</a>
                 </div>
             </div>
         </div>
@@ -564,9 +591,9 @@
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="container">
-            <h2>Ready to Become a GoGetter?</h2>
-            <p>Join thousands of achievers who are reaching their goals every day</p>
-            <a href="#" class="cta-button">Start Your Journey Now</a>
+            <h2>Ready to Start Your Journey?</h2>
+            <p>Join thousands of clients and service providers who are connecting through GoGetter</p>
+            <a href="#" class="cta-button" id="journeyBtn">Start Your Journey Now</a>
         </div>
     </section>
 
@@ -576,38 +603,32 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>GoGetter</h3>
-                    <p>The ultimate productivity app for goal-setters and achievers.</p>
+                    <p>Dignity Through Opportunity - Connecting clients with skilled service providers.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.facebook.com/gogetterza/" target="_blank"><i class="fab fa-facebook-f"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
-                    <h3>Product</h3>
+                    <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="#">Features</a></li>
-                        <li><a href="#">Pricing</a></li>
-                        <li><a href="#">Use Cases</a></li>
-                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="#" id="aboutLink">About</a></li>
+                        <li><a href="#" id="termsLink">Terms & Conditions</a></li>
+                        <li><a href="#" id="privacyLink">Privacy Policy</a></li>
+                        <li><a href="#" id="refundLink">Refund Policy</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Support</h3>
+                    <h3>Subscriptions</h3>
                     <ul>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#pricing">Client (Free)</a></li>
+                        <li><a href="#pricing">GoGetter (R90/month)</a></li>
+                        <li><a href="#pricing">Company (R845/month)</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Contact</h3>
                     <ul>
-                        <li><i class="fas fa-envelope"></i> support@gogetter.com</li>
-                        <li><i class="fas fa-phone"></i> +27 21 123 4567</li>
-                        <li><i class="fas fa-map-marker-alt"></i> Cape Town, South Africa</li>
+                        <li><i class="fas fa-envelope"></i> Support@gogetter.site</li>
                     </ul>
                 </div>
             </div>
@@ -617,21 +638,205 @@
         </div>
     </footer>
 
+    <!-- Under Construction Modal -->
+    <div class="modal" id="underConstructionModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h2>Under Construction</h2>
+            <p>This feature is currently under development and will be available soon. Thank you for your patience!</p>
+            <button class="cta-button" id="modalOkBtn">OK</button>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div class="modal" id="aboutModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeAboutModal">&times;</span>
+            <h2>About GoGetter</h2>
+            <p>GoGetter is a platform that connects clients, service providers, and companies in a secure and efficient way.</p>
+            <p>Our mission is to make it easier for people to find trusted services, manage jobs, and complete payments all in one app.</p>
+            <p>Whether you're a client looking for help, a professional offering your skills, or a company managing projects — GoGetter makes it simple and reliable.</p>
+        </div>
+    </div>
+
+    <!-- Terms Modal -->
+    <div class="modal" id="termsModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeTermsModal">&times;</span>
+            <h2>Terms of Service</h2>
+            <p>By using the GoGetter app, you agree to the following:</p>
+            <ol>
+                <li>You must provide accurate information when signing up.</li>
+                <li>You are responsible for keeping your account secure.</li>
+                <li>Payments and bookings made through GoGetter are binding agreements between users.</li>
+                <li>We reserve the right to suspend or terminate accounts that misuse the platform.</li>
+                <li>GoGetter provides the platform but is not responsible for the outcome of jobs between clients and service providers.</li>
+            </ol>
+            <p>These Terms may be updated from time to time. Continued use of the app means you accept the latest Terms.</p>
+        </div>
+    </div>
+
+    <!-- Privacy Modal -->
+    <div class="modal" id="privacyModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closePrivacyModal">&times;</span>
+            <h2>Privacy Policy</h2>
+            <p>At GoGetter, your privacy is important to us.</p>
+            <ol>
+                <li><strong>Information We Collect:</strong> We collect your name, contact details, and any information you provide when using the app.</li>
+                <li><strong>How We Use Data:</strong> We use your information to provide services, process payments, and improve the app experience.</li>
+                <li><strong>Data Protection:</strong> We use secure systems to protect your personal information.</li>
+                <li><strong>Sharing:</strong> We do not sell your data. We may only share with trusted partners (e.g., payment processors) to deliver services.</li>
+                <li><strong>Your Rights:</strong> You can request to view, update, or delete your data at any time.</li>
+            </ol>
+            <p>If you have questions, please contact us at Support@gogetter.site</p>
+        </div>
+    </div>
+
+    <!-- Refund Modal -->
+    <div class="modal" id="refundModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeRefundModal">&times;</span>
+            <h2>Refund Policy</h2>
+            <p>We aim to ensure customer satisfaction.</p>
+            <ol>
+                <li><strong>Subscription Refunds:</strong> Subscription fees are refundable within 7 days of purchase if the service has not been used.</li>
+                <li><strong>Service Disputes:</strong> Refunds for jobs booked through GoGetter are handled on a case-by-case basis, depending on the agreement between client and service provider.</li>
+                <li><strong>Processing Time:</strong> Approved refunds will be processed within 7 working days.</li>
+                <li><strong>Contact Us:</strong> For refund requests, please email Support@gogetter.site with your transaction details.</li>
+            </ol>
+        </div>
+    </div>
+
     <script>
-        // Simple JavaScript for smooth scrolling
+        // Under Construction Modal
+        const underConstructionModal = document.getElementById('underConstructionModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalOkBtn = document.getElementById('modalOkBtn');
+        
+        // Function to show under construction modal
+        function showUnderConstruction() {
+            underConstructionModal.style.display = 'flex';
+        }
+        
+        // Close modal functions
+        closeModal.addEventListener('click', function() {
+            underConstructionModal.style.display = 'none';
+        });
+        
+        modalOkBtn.addEventListener('click', function() {
+            underConstructionModal.style.display = 'none';
+        });
+        
+        // Add event listeners to buttons that should show under construction
+        document.getElementById('downloadBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            showUnderConstruction();
+        });
+        
+        document.getElementById('startFreeBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            showUnderConstruction();
+        });
+        
+        document.getElementById('clientPlanBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            showUnderConstruction();
+        });
+        
+        document.getElementById('gogetterPlanBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            showUnderConstruction();
+        });
+        
+        document.getElementById('companyPlanBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            showUnderConstruction();
+        });
+        
+        document.getElementById('journeyBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            showUnderConstruction();
+        });
+        
+        // Policy modals
+        const aboutModal = document.getElementById('aboutModal');
+        const termsModal = document.getElementById('termsModal');
+        const privacyModal = document.getElementById('privacyModal');
+        const refundModal = document.getElementById('refundModal');
+        
+        // Open modals
+        document.getElementById('aboutLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            aboutModal.style.display = 'flex';
+        });
+        
+        document.getElementById('termsLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            termsModal.style.display = 'flex';
+        });
+        
+        document.getElementById('privacyLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            privacyModal.style.display = 'flex';
+        });
+        
+        document.getElementById('refundLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            refundModal.style.display = 'flex';
+        });
+        
+        // Close modals
+        document.getElementById('closeAboutModal').addEventListener('click', function() {
+            aboutModal.style.display = 'none';
+        });
+        
+        document.getElementById('closeTermsModal').addEventListener('click', function() {
+            termsModal.style.display = 'none';
+        });
+        
+        document.getElementById('closePrivacyModal').addEventListener('click', function() {
+            privacyModal.style.display = 'none';
+        });
+        
+        document.getElementById('closeRefundModal').addEventListener('click', function() {
+            refundModal.style.display = 'none';
+        });
+        
+        // Close modal if clicked outside content
+        window.addEventListener('click', function(e) {
+            if (e.target === underConstructionModal) {
+                underConstructionModal.style.display = 'none';
+            }
+            if (e.target === aboutModal) {
+                aboutModal.style.display = 'none';
+            }
+            if (e.target === termsModal) {
+                termsModal.style.display = 'none';
+            }
+            if (e.target === privacyModal) {
+                privacyModal.style.display = 'none';
+            }
+            if (e.target === refundModal) {
+                refundModal.style.display = 'none';
+            }
+        });
+        
+        // Smooth scrolling for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
                 }
             });
         });
